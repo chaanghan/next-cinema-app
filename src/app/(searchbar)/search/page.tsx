@@ -1,3 +1,7 @@
+import MovieItem from '@/components/MovieItem';
+import movies from '../../../dummy.json';
+import style from './page.module.css';
+
 export default async function Page({
   searchParams,
 }: {
@@ -5,5 +9,11 @@ export default async function Page({
 }) {
   const { q } = await searchParams;
 
-  return <div>Search : {q}</div>;
+  return (
+    <div className={style.recommandMovie}>
+      {movies.map((movie) => (
+        <MovieItem key={movie.id} {...movie} recommand />
+      ))}
+    </div>
+  );
 }
