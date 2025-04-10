@@ -1,6 +1,6 @@
 import MovieItem from '@/components/MovieItem';
-import movies from '../../../dummy.json';
 import style from './page.module.css';
+import { MovieData } from '@/types';
 
 export default async function Page({
   searchParams,
@@ -8,6 +8,15 @@ export default async function Page({
   searchParams: Promise<{ q: string }>;
 }) {
   const { q } = await searchParams;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`,
+    { next: { revalidate: 60 * 60 * 24 } }
+  );
+  if (!res.ok) {
+    return <div>오류가 발생했습니다.</div>;
+  }
+  const movies: MovieData[] = await res.json();
 
   return (
     <div className={style.recommandMovie}>
