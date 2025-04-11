@@ -11,7 +11,7 @@ export default async function Page({
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`,
-    { next: { revalidate: 60 * 60 * 24 } }
+    { cache: 'force-cache' }
   );
   if (!res.ok) {
     return <div>오류가 발생했습니다.</div>;
