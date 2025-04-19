@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 25px 0px;
+}
+
+.content {
+  /* background-color: rgb(240, 240, 240); */
+  padding: 5px 0px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.date {
+  color: gray;
+  font-size: 14px;
+}
+.top_container {
+  display: flex;
+  gap: 10px;
+}
+.deleteBtn {
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+  color: gray;
+}
