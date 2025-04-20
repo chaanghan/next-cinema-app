@@ -20,9 +20,3 @@
   display: flex;
   gap: 10px;
 }
-.deleteBtn {
-  cursor: pointer;
-  text-decoration: underline;
-  font-size: 14px;
-  color: gray;
-}

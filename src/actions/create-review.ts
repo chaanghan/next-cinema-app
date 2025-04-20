@@ -1,12 +1,17 @@
 'use server';
 
-export default async function createReviewAction(formData: FormData) {
+import { revalidatePath } from 'next/cache';
+
+export default async function createReviewAction(_: any, formData: FormData) {
   const content = formData.get('content')?.toString();
   const author = formData.get('author')?.toString();
   const movieId = formData.get('movieId')?.toString();
 
   if (!content || !author || !movieId) {
-    return;
+    return {
+      status: false,
+      error: '리뷰 내용과 작성자를 입력해주세요',
+    };
   }
 
   try {
@@ -21,9 +26,17 @@ export default async function createReviewAction(formData: FormData) {
         }),
       }
     );
-    console.log(res.status);
+
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+
+    revalidatePath(`/movie/${movieId}`);
   } catch (e) {
     console.error(e);
-    return;
+    return {
+      status: false,
+      error: `리뷰 저장 실패 : ${e}`,
+    };
   }
 }
