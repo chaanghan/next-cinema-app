@@ -1,6 +1,5 @@
 'use server';
 
-import { delay } from '@/util/delay';
 import { revalidatePath } from 'next/cache';
 
 export async function deleteReviewAction(_: any, formData: FormData) {

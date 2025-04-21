@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import style from './globals.module.css';
 import Link from 'next/link';
+import { ReactNode } from 'react';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -20,8 +21,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -31,7 +34,9 @@ export default function RootLayout({
         <header className={style.header}>
           <Link href={'/'}>ONEBITE CINEMA</Link>
         </header>
-        {children}
+        <main>{children}</main>
+        {modal}
+        <div id="modal-root"></div>
       </body>
     </html>
   );
