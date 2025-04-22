@@ -3,6 +3,7 @@ import style from './page.module.css';
 import { MovieData } from '@/types';
 import { delay } from '@/util/delay';
 import { Suspense } from 'react';
+import { Metadata } from 'next';
 
 async function SearchResult({ q }: { q: string }) {
   await delay(1500);
@@ -22,6 +23,24 @@ async function SearchResult({ q }: { q: string }) {
       ))}
     </div>
   );
+}
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ q: string }>;
+}): Promise<Metadata> {
+  const { q } = await searchParams;
+
+  return {
+    title: `${q}: 한입 시네마 검색`,
+    description: `${q}의 검색 결과`,
+    openGraph: {
+      title: `${q}: 한입 시네마 검색`,
+      description: `${q}의 검색 결과`,
+      images: ['/thumbnail.png'],
+    },
+  };
 }
 
 export default async function Page({
